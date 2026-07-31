@@ -65,7 +65,7 @@
                         default => 'bg-dark',
                         };
                         @endphp
-                        <span class="badge {{$methodClass}">{{$route['method']}}</span>
+                        <span class="badge {{$methodClass}}">{{$route['method']}}</span>
                     </td>
                     <td> /{{ ltrim($route['uri'], '/') }}</td>
                     <td>  {{ $route['controller'] }}</td>
