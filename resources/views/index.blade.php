@@ -40,6 +40,7 @@
         }
         .container> div{
             font-size: 12px!important;
+            color: #0b2932;
         }
     </style>
 <body>
@@ -52,7 +53,7 @@
             <h4 class="card-title">List Routes</h4>
             <form method="get">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Cerca uri" aria-label="Cerca Uri"
+                    <input name="search" type="text" class="form-control" placeholder="Cerca uri" aria-label="Cerca Uri"
                            aria-describedby="button-addon2">
                     <button class="btn btn-info" type="submit" id="button-addon2">Search Uri</button>
                 </div>
