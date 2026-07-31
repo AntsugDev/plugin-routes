@@ -54,6 +54,7 @@
         </div>
         <div class="card-body">
             <h4 class="card-title">List Routes</h4>
+
             <form method="get" id="form-search">
                 <input type="hidden" name="search" value="" id="search">
             </form>
@@ -62,6 +63,10 @@
                        aria-describedby="button-addon2">
                 <button class="btn btn-info" type="button" id="btn_search">Search Uri</button>
                 <button class="btn btn-dark" type="button" id="btn_clear">Clear</button>
+            </div>
+            <div class="progress" id="progress" style="display:none;margin-left: 5px;margin-right: 5px;padding: 5px">
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                     style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="group">
                 @foreach($routes as $k => $route)
@@ -103,16 +108,24 @@
     const inputS = document.getElementById('tsearch')
     const search = document.getElementById('search')
     const form = document.getElementById('form-search')
+    const bar = document.getElementById('progress')
+
+    const activeBar = (status) => {
+        bar.style.display = status ? "" : "none"
+    }
 
     const clickEvent = (data) => {
+        activeBar(true)
         if (data) {
             search.value = data
         } else {
             search.value = ""
         }
         form.submit()
+        setTimeout( () => activeBar(false), 10000)
     }
     btnClear.addEventListener('click', () => {
+
         clickEvent(null)
     })
     btnSearch.addEventListener('click', () => {
