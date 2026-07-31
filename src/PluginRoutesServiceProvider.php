@@ -16,6 +16,10 @@ class PluginRoutesServiceProvider extends  ServiceProvider
         // 1. Indichi dove si trovano le viste Blade del tuo pacchetto
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'plugin-routes');
 
+        $this->publishes([
+            __DIR__ . '/../resources/css' => public_path('vendor/plugin-routes/css'),
+        ], 'plugin-routes-assets');
+
         // 2. Registri la rotta del tuo pacchetto
         // In alternativa puoi anche caricare un file esterno con:
         // $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');

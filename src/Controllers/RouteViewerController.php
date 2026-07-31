@@ -29,10 +29,10 @@ class RouteViewerController extends Controller
             }
             $uri = $route->uri();
             return [
-                'uri'        => $uri,
+                'uri'        => trim($uri),
                 'method'     => implode('|', array_diff($route->methods(), ['HEAD'])), // Nascondiamo HEAD per pulizia
-                'controller' => $controller,
-                'function'   => $function,
+                'controller' => trim($controller),
+                'function'   => trim($function),
             ];
         });
 
