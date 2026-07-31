@@ -20,8 +20,18 @@
             margin-bottom: 10px;
             margin-top: 10px;
         }
-        td{
+
+        td {
             white-space: nowrap;
+        }
+        .group{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            max-width: 98% !important;
+            padding: 10px;
+            margin-bottom: 10px;
+            margin-right: 10px;
         }
     </style>
 <body>
@@ -39,44 +49,27 @@
                     <button class="btn btn-info" type="submit" id="button-addon2">Search Uri</button>
                 </div>
             </form>
-            <table class="table table-hover table-striped table-responsive-md table-secondary">
-                <thead>
-                <tr>
-                    <th colspan="4" style="text-align: right">
-                        <span class="badge bg-info">
-                              Totale: {{ count($routes) }}
-                        </span>
-                    </th>
-                </tr>
-                <tr>
-                    <th scope="col" style="max-width: 150px">Method</th>
-                    <th scope="col" style="max-width: 150px">Uri</th>
-                    <th scope="col" style="max-width: 150px">Controller</th>
-                    <th scope="col" style="max-width: 150px">Function</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($routes as $route):
-                <tr>
-                    <td>
-                        @php
-                        $methodClass = match($route['method']) {
-                        'GET' => 'bg-success',
-                        'POST' => 'bg-warning',
-                        'PUT', 'PATCH' => 'bg-secondary',
-                        'DELETE' => 'bg-danger',
-                        default => 'bg-dark',
-                        };
-                        @endphp
-                        <span class="badge {{$methodClass}}">{{$route['method']}}</span>
-                    </td>
-                    <td>/{{ ltrim($route['uri'], '/') }}</td>
-                    <td>{{ $route['controller'] }}</td>
-                    <td>{{ $route['function'] }}</td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <div class="group">
+            @foreach($routes as $route):
+            <div class="list-group list-group-flush">
+                <div class="list-group-item list-group-item-action">
+                    @php
+                    $methodClass = match($route['method']) {
+                    'GET' => 'bg-success',
+                    'POST' => 'bg-warning',
+                    'PUT', 'PATCH' => 'bg-secondary',
+                    'DELETE' => 'bg-danger',
+                    default => 'bg-dark',
+                    };
+                    @endphp
+                    <span class="badge {{$methodClass}}">{{$route['method']}}</span>
+                </div>
+                <div class="list-group-item list-group-item-action"><strong>Uri:&nbsp;</strong>/{{ ltrim($route['uri'], '/') }}</div>
+                <div class="list-group-item list-group-item-action"><strong>Controller:&nbsp;</strong>{{ $route['controller'] }}</div>
+                <div class="list-group-item list-group-item-action"><strong>Function:&nbsp;</strong>{{ $route['function'] }}</div>
+            </div>
+            @endforeach
+            </div>
         </div>
     </div>
 </div>
