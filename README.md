@@ -21,8 +21,8 @@
 
 ## Requirements & Compatibility
 
-- **PHP**: `^8.2`
-- **Laravel Framework**: `^10.0` | `^11.0` | `^12.0` | `^13.0` (using `illuminate/support` & `illuminate/routing`)
+- **PHP**: `>=8.2`
+- **Laravel Framework**: `>=8.0` (using `illuminate/support` & `illuminate/routing`)
 
 ---
 
