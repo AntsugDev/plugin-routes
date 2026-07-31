@@ -31,7 +31,7 @@
 Install the package via Composer:
 
 ```bash
-       composer require antonio-sugamele/plugin-routes
+       composer require antonio-sugamele/plugin-routes --dev
 ```
 
 ## Post-Installation

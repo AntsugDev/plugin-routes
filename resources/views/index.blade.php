@@ -24,7 +24,8 @@
         td {
             white-space: nowrap;
         }
-        .group{
+
+        .group {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -34,12 +35,14 @@
             margin-bottom: 10px;
             margin-right: 10px;
         }
-        .container{
+
+        .container {
             max-height: 300px;
             padding: 5px;
         }
-        .container> div{
-            font-size: 12px!important;
+
+        .container > div {
+            font-size: 12px !important;
             color: #0b2932;
         }
     </style>
@@ -51,39 +54,71 @@
         </div>
         <div class="card-body">
             <h4 class="card-title">List Routes</h4>
-            <form method="get">
-                <div class="input-group mb-3">
-                    <input name="search" type="text" class="form-control" placeholder="Cerca uri" aria-label="Cerca Uri"
-                           aria-describedby="button-addon2">
-                    <button class="btn btn-info" type="submit" id="button-addon2">Search Uri</button>
-                </div>
+            <form method="get" id="form-search">
+                <input type="hidden" name="search" value="" id="search">
             </form>
+            <div class="input-group mb-3">
+                <input id="tsearch" type="text" class="form-control" placeholder="Cerca uri" aria-label="Cerca Uri"
+                       aria-describedby="button-addon2">
+                <button class="btn btn-info" type="button" id="btn_search">Search Uri</button>
+                <button class="btn btn-dark" type="button" id="btn_clear">Clear</button>
+            </div>
             <div class="group">
-            @foreach($routes as $k =>  $route)
+                @foreach($routes as $k => $route)
                 @php
                 $backgroundColor = $k%2 === 0 ? 'bg-secondary' : 'bg-light'
                 @endphp
-            <div class="list-group list-group-flush {{$backgroundColor}} container" style="width: 90%!important;margin-bottom: 10px">
-                <div class="list-group-item list-group-item-action">
-                    @php
-                    $methodClass = match($route['method']) {
-                    'GET' => 'bg-success',
-                    'POST' => 'bg-warning',
-                    'PUT', 'PATCH' => 'bg-secondary',
-                    'DELETE' => 'bg-danger',
-                    default => 'bg-dark',
-                    };
-                    @endphp
-                    <span class="badge {{$methodClass}}">{{$route['method']}}</span>
+                <div class="list-group list-group-flush {{$backgroundColor}} container"
+                     style="width: 90%!important;margin-bottom: 10px">
+                    <div class="list-group-item list-group-item-action">
+                        @php
+                        $methodClass = match($route['method']) {
+                        'GET' => 'bg-success',
+                        'POST' => 'bg-warning',
+                        'PUT', 'PATCH' => 'bg-secondary',
+                        'DELETE' => 'bg-danger',
+                        default => 'bg-dark',
+                        };
+                        @endphp
+                        <span class="badge {{$methodClass}}">{{$route['method']}}</span>
+                    </div>
+                    <div class="list-group-item list-group-item-action"><strong>Uri:&nbsp;</strong>/{{
+                        ltrim($route['uri'], '/') }}
+                    </div>
+                    <div class="list-group-item list-group-item-action"><strong>Controller:&nbsp;</strong>{{
+                        $route['controller'] }}
+                    </div>
+                    <div class="list-group-item list-group-item-action"><strong>Function:&nbsp;</strong>{{
+                        $route['function'] }}
+                    </div>
                 </div>
-                <div class="list-group-item list-group-item-action"><strong>Uri:&nbsp;</strong>/{{ ltrim($route['uri'], '/') }}</div>
-                <div class="list-group-item list-group-item-action"><strong>Controller:&nbsp;</strong>{{ $route['controller'] }}</div>
-                <div class="list-group-item list-group-item-action"><strong>Function:&nbsp;</strong>{{ $route['function'] }}</div>
-            </div>
-            @endforeach
+                @endforeach
             </div>
         </div>
     </div>
 </div>
+<script>
+    const btnSearch = document.getElementById('btn_search')
+    const btnClear = document.getElementById('btn_clear')
+    const inputS = document.getElementById('tsearch')
+    const search = document.getElementById('search')
+    const form = document.getElementById('form-search')
+
+    const clickEvent = (data) => {
+        if (data) {
+            search.value = data
+        } else {
+            search.value = ""
+        }
+        form.submit()
+    }
+    btnClear.addEventListener('click', () => {
+        clickEvent(null)
+    })
+    btnSearch.addEventListener('click', () => {
+        let data = inputS.value
+        clickEvent(data)
+    })
+</script>
 </body>
 </html>
