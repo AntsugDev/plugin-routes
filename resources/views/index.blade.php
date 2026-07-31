@@ -20,6 +20,9 @@
             margin-bottom: 10px;
             margin-top: 10px;
         }
+        td{
+            white-space: nowrap;
+        }
     </style>
 <body>
 <div class="main">
@@ -46,10 +49,10 @@
                     </th>
                 </tr>
                 <tr>
-                    <th scope="col">Method</th>
-                    <th scope="col">Uri</th>
-                    <th scope="col">Controller</th>
-                    <th scope="col">Function</th>
+                    <th scope="col" style="max-width: 150px">Method</th>
+                    <th scope="col" style="max-width: 150px">Uri</th>
+                    <th scope="col" style="max-width: 150px">Controller</th>
+                    <th scope="col" style="max-width: 150px">Function</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -67,8 +70,8 @@
                         @endphp
                         <span class="badge {{$methodClass}}">{{$route['method']}}</span>
                     </td>
-                    <td> /{{ ltrim($route['uri'], '/') }}</td>
-                    <td>  {{ $route['controller'] }}</td>
+                    <td>/{{ ltrim($route['uri'], '/') }}</td>
+                    <td>{{ $route['controller'] }}</td>
                     <td>{{ $route['function'] }}</td>
                 </tr>
                 @endforeach
