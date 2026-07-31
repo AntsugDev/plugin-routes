@@ -9,7 +9,14 @@ class RouteViewerController extends Controller
 
     public function __invoke()
     {
-        $routes = collect(Route::getRoutes())->map(function ($route) {
+        $search = request()->query('search');
+        $routes = collect(Route::getRoutes());
+        if(!is_null($search)) {
+           $routes = $routes->filter(function ($route) use ($search) {
+               return stristr($route->uri(), $search) !== false;
+           })->values();
+        }
+        $routes = $routes->uri()->map(function ($route) use($search) {
             $action = $route->getActionName();
 
             // Se la rotta punta a un Controller con il classico formato Class@method
@@ -20,9 +27,9 @@ class RouteViewerController extends Controller
                 $controller = $action;
                 $function   = $action === 'Closure' ? 'Closure' : '__invoke';
             }
-
+            $uri = $route->uri();
             return [
-                'uri'        => $route->uri(),
+                'uri'        => $uri,
                 'method'     => implode('|', array_diff($route->methods(), ['HEAD'])), // Nascondiamo HEAD per pulizia
                 'controller' => $controller,
                 'function'   => $function,
@@ -31,5 +38,7 @@ class RouteViewerController extends Controller
 
         return view('plugin-routes::index', compact('routes'));
     }
+
+
 
 }
