@@ -26,8 +26,9 @@
         }
         .group{
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-content: flex-start;
             max-width: 98% !important;
             padding: 10px;
             margin-bottom: 10px;
@@ -50,8 +51,8 @@
                 </div>
             </form>
             <div class="group">
-            @foreach($routes as $route):
-            <div class="list-group list-group-flush">
+            @foreach($routes as $route)
+            <div class="list-group list-group-flush" style="width: 90%!important;">
                 <div class="list-group-item list-group-item-action">
                     @php
                     $methodClass = match($route['method']) {
