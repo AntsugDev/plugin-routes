@@ -35,6 +35,12 @@ Install the package via Composer:
 ```
 
 ## Post-Installation
+Publish vendor:
+
+```bash
+       php artisan vendor:publish --tag=plugin-routes-assets --force  
+```
+
 Clear your route cache to ensure the new endpoint is properly registered:
 
 ```bash
