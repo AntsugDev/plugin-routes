@@ -50,7 +50,10 @@
 <div class="main">
     <div class="card text-white bg-secondary mb-3" style="max-width: 70rem;">
         <div class="card-header">
-            <h3 class="card-title">Plugin Routes - Dashboard</h3>
+            <h3 class="card-title">Plugin Routes - Dashboard
+            &nbsp;
+                <span class="badge bg-info}">Totale delle rotte: {{count($routes)}}</span>
+            </h3>
         </div>
         <div class="card-body">
             <h4 class="card-title">List Routes</h4>
