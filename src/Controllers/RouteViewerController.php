@@ -16,7 +16,7 @@ class RouteViewerController extends Controller
                return stristr($route->uri(), $search) !== false;
            })->values();
         }
-        $routes = $routes->uri()->map(function ($route) use($search) {
+        $routes = $routes->map(function ($route) use($search) {
             $action = $route->getActionName();
 
             // Se la rotta punta a un Controller con il classico formato Class@method
