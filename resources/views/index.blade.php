@@ -34,6 +34,13 @@
             margin-bottom: 10px;
             margin-right: 10px;
         }
+        .container{
+            max-height: 300px;
+            padding: 5px;
+        }
+        .container> div{
+            font-size: 12px!important;
+        }
     </style>
 <body>
 <div class="main">
@@ -51,8 +58,11 @@
                 </div>
             </form>
             <div class="group">
-            @foreach($routes as $route)
-            <div class="list-group list-group-flush" style="width: 90%!important;">
+            @foreach($routes as $k =>  $route)
+                @php
+                $backgroundColor = $k%2 === 0 ? 'bg-secondary' : 'bg-light'
+                @endphp
+            <div class="list-group list-group-flush {{$backgroundColor}} container" style="width: 90%!important;margin-bottom: 10px">
                 <div class="list-group-item list-group-item-action">
                     @php
                     $methodClass = match($route['method']) {
